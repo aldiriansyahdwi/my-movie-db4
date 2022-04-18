@@ -7,4 +7,10 @@
     <string name="password_hint">password</string>
     <string name="login_button_text">Login</string>
     <string name="register_nav_text">Not register yet?</string>
+    <string name="ic_profile_desc">icon profile</string>
+    <string name="welcome_user_text">welcome, user</string>
+    <string name="title_placeholder">Movie Title</string>
+    <string name="duration_placeholder">0 hours 0 minutes</string>
+    <string name="genre_placeholder">movie genre</string>
+    <string name="poster_image">poster image</string>
 </resources>

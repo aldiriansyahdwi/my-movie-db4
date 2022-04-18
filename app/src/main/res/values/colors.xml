@@ -10,4 +10,7 @@
     <color name="orange_main">#FC6E51</color>
     <color name="orang_secondary">#e06248</color>
     <color name="red_error">#BA4A4A</color>
+    <color name="dark_gray">#404040</color>
+    <color name="gray">#636363</color>
+    <color name="light_gray">#DADADA</color>
 </resources>

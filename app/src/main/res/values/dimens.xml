@@ -2,4 +2,6 @@
 <resources>
     <dimen name="margin_icon_app">128dp</dimen>
     <dimen name="margin_input_login">48dp</dimen>
+    <dimen name="margin_home">24dp</dimen>
+    <dimen name="margin_item">12dp</dimen>
 </resources>
