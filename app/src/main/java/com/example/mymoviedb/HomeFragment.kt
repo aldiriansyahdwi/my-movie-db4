@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymoviedb.databinding.FragmentHomeBinding
+import com.example.mymoviedb.listmovie.GetPopularMovieResponse
 import com.example.mymoviedb.listmovie.ListMovieAdapter
-import com.example.mymoviedb.listmovie.Result
-import com.example.mymoviedb.listmovie.TrendMovieResponse
+import com.example.mymoviedb.listmovie.Results
 import com.example.mymoviedb.service.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,8 +38,8 @@ class HomeFragment : Fragment() {
 
     private fun fetchAllData(){
         ApiClient.instance.getTrendingMovie()
-            .enqueue(object: Callback<TrendMovieResponse>{
-                override fun onResponse(call: Call<TrendMovieResponse>, response: Response<TrendMovieResponse>) {
+            .enqueue(object: Callback<GetPopularMovieResponse>{
+                override fun onResponse(call: Call<GetPopularMovieResponse>, response: Response<GetPopularMovieResponse>) {
                     val body = response.body()
                     val code = response.code()
                     if (code == 200){
@@ -52,15 +52,15 @@ class HomeFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<TrendMovieResponse>, t: Throwable) {
+                override fun onFailure(call: Call<GetPopularMovieResponse>, t: Throwable) {
                     Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
-    private fun showList(data: List<Result>?){
+    private fun showList(data: List<Results>?){
         val adapter = ListMovieAdapter(object : ListMovieAdapter.OnClickListener{
-            override fun onClickItem(data: Result) {
+            override fun onClickItem(data: Results) {
 
             }
         })

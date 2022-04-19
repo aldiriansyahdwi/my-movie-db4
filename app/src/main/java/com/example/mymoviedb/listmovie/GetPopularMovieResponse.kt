@@ -3,13 +3,13 @@ package com.example.mymoviedb.listmovie
 
 import com.google.gson.annotations.SerializedName
 
-data class TrendMovieResponse(
+data class GetPopularMovieResponse(
     @SerializedName("page")
-    val page: Int,
+    val page: Int?,
     @SerializedName("results")
-    val results: List<Result>,
+    val results: List<Results>?,
     @SerializedName("total_pages")
-    val totalPages: Int,
+    val totalPages: Int?,
     @SerializedName("total_results")
-    val totalResults: Int
+    val totalResults: Int?
 )
