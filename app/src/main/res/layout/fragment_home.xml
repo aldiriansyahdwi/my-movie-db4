@@ -31,10 +31,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_home"
         android:layout_marginHorizontal="@dimen/margin_home"
         android:id="@+id/rv_movie_list"
-        app:layout_constraintTop_toBottomOf="@id/tv_welcome_user"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_welcome_user"
+        app:layout_constraintHeight_percent="0.9"
+        tools:listitem="@layout/movie_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

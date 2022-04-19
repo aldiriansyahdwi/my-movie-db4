@@ -13,4 +13,6 @@
     <string name="duration_placeholder">0 hours 0 minutes</string>
     <string name="genre_placeholder">movie genre</string>
     <string name="poster_image">poster image</string>
+    <string name="release_date_placeholder">2000-01-01</string>
+    <string name="popularity_placeholder">popularity</string>
 </resources>
