@@ -19,4 +19,7 @@
     <string name="description_placeholder">description</string>
     <string name="production_placeholder">production</string>
     <string name="tagline_placeholder">tagline</string>
+    <string name="register_text">Register</string>
+    <string name="email_hint">email</string>
+    <string name="confirm_password_hint">confirm password</string>
 </resources>

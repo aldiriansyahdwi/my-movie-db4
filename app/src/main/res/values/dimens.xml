@@ -5,4 +5,6 @@
     <dimen name="margin_home">24dp</dimen>
     <dimen name="margin_item">12dp</dimen>
     <dimen name="margin_small_icon">2dp</dimen>
+    <dimen name="register_margin">72dp</dimen>
+    <dimen name="padding_et">48dp</dimen>
 </resources>
