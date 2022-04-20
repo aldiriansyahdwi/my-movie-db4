@@ -15,4 +15,8 @@
     <string name="poster_image">poster image</string>
     <string name="release_date_placeholder">2000-01-01</string>
     <string name="popularity_placeholder">popularity</string>
+    <string name="rating_placeholder">Rating</string>
+    <string name="description_placeholder">description</string>
+    <string name="production_placeholder">production</string>
+    <string name="tagline_placeholder">tagline</string>
 </resources>

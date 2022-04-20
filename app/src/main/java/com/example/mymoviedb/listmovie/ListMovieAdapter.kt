@@ -49,7 +49,7 @@ class ListMovieAdapter(private val onItemClick: OnClickListener): RecyclerView.A
                     .load("https://image.tmdb.org/t/p/w500${data.posterPath}")
                     .into(ivMoviePoster)
                 root.setOnClickListener{
-
+                    onItemClick.onClickItem(data)
                 }
             }
         }

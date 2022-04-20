@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymoviedb.databinding.FragmentDetailBinding
 import com.example.mymoviedb.databinding.FragmentHomeBinding
 import com.example.mymoviedb.listmovie.GetPopularMovieResponse
 import com.example.mymoviedb.listmovie.ListMovieAdapter
@@ -20,6 +23,8 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get()= _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +56,6 @@ class HomeFragment : Fragment() {
                         Log.d("response-code", code.toString())
                     }
                 }
-
                 override fun onFailure(call: Call<GetPopularMovieResponse>, t: Throwable) {
                     Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
                 }
@@ -61,7 +65,9 @@ class HomeFragment : Fragment() {
     private fun showList(data: List<Results>?){
         val adapter = ListMovieAdapter(object : ListMovieAdapter.OnClickListener{
             override fun onClickItem(data: Results) {
-
+                val movieId = data.id
+                val clickedToDetail = movieId?.let { HomeFragmentDirections.actionHomeFragmentToDetailFragment(it) }
+                clickedToDetail?.let { findNavController().navigate(it) }
             }
         })
         adapter.submitData(data)
