@@ -1,10 +1,9 @@
-package com.example.mymoviedb
+package com.example.mymoviedb.fragment
 
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.service.autofill.UserData
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentProfileBinding
 import com.example.mymoviedb.userdatabase.User
 import com.example.mymoviedb.userdatabase.UserDatabase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import okhttp3.internal.format
-import java.text.Format
 import java.text.SimpleDateFormat
 import java.util.*
 

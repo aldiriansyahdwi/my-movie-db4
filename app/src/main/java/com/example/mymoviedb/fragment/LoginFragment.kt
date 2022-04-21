@@ -1,4 +1,4 @@
-package com.example.mymoviedb
+package com.example.mymoviedb.fragment
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentLoginBinding
 import com.example.mymoviedb.userdatabase.UserDatabase
 import kotlinx.coroutines.GlobalScope

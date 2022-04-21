@@ -1,4 +1,4 @@
-package com.example.mymoviedb
+package com.example.mymoviedb.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.strictmode.FragmentReuseViolation
 import androidx.navigation.fragment.findNavController
+import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentRegisterBinding
 import com.example.mymoviedb.userdatabase.User
 import com.example.mymoviedb.userdatabase.UserDatabase
