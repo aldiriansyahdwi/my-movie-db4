@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">My Movie DB</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="image_app">image app</string>
     <string name="username_hint">username</string>
@@ -22,4 +21,13 @@
     <string name="register_text">Register</string>
     <string name="email_hint">email</string>
     <string name="confirm_password_hint">confirm password</string>
+    <string name="profile_title">Profile</string>
+    <string name="real_name_hint">real name</string>
+    <string name="birthday_hint">birthday</string>
+    <string name="update_text">Update</string>
+    <string-array name="profile_array">
+        <item></item>
+        <item>Profile</item>
+        <item>Log Out</item>
+    </string-array>
 </resources>

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/drawable/bg_item.xml" value="0.2455" />
+        <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/drawable/ic_exit.xml" value="0.1535" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/drawable/ic_none.xml" value="0.1" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/drawable/ic_profile.xml" value="0.1" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/drawable/ic_rating.xml" value="0.202" />
@@ -12,6 +13,7 @@
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/layout/fragment_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/layout/fragment_register.xml" value="0.24010416666666667" />
         <entry key="..\:/Tugas/UPNVJ/Semester 6/Prak Mobile Programming/10/MyMovieDB/app/src/main/res/layout/movie_item.xml" value="0.264" />
       </map>

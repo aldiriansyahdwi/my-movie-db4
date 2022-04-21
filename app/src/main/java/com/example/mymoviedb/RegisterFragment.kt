@@ -39,7 +39,7 @@ class RegisterFragment : Fragment() {
             val password: String = binding.etPassword.text.toString()
             val confirmPassword: String = binding.etConfirmPassword.text.toString()
 
-            val userData = User(null, email, username, password, null, null, null)
+            val userData = User(email, username, password, null, null, null)
             when {
                 username.isEmpty() -> { binding.etUsername.error = "username cannot be empty" }
                 email.isEmpty() -> { binding.etEmail.error = "email cannot be empty" }

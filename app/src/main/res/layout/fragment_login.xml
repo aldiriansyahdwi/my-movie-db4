@@ -43,7 +43,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ly_password"
+        android:id="@+id/ly_datepicker_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ly_username"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/et_password"
             android:inputType="textPassword"
-
+            android:paddingEnd="@dimen/padding_et"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +70,7 @@
         android:layout_marginTop="@dimen/margin_input_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ly_password"
+        app:layout_constraintTop_toBottomOf="@id/ly_datepicker_birthday"
         android:layout_marginStart="@dimen/margin_input_login"
         android:layout_marginEnd="@dimen/margin_input_login"
         android:text="@string/login_button_text"

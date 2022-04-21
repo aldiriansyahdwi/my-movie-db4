@@ -1,11 +1,16 @@
 package com.example.mymoviedb
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +28,7 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get()= _binding!!
-
+    val sharedPreFile = "login_account"
 
 
     override fun onCreateView(
@@ -37,10 +42,41 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences(sharedPreFile, Context.MODE_PRIVATE)
 
         binding.rvMovieList.layoutManager = LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
-
+        binding.tvWelcomeUser.text = "Welcome, ${sharedPreferences.getString("username", "-")}"
         fetchAllData()
+
+        binding.ivProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+
+        binding.ivExit.setOnClickListener {
+            sharedPreferences.edit().clear().apply()
+            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+            Toast.makeText(requireContext(), "Log Out", Toast.LENGTH_SHORT).show()
+        }
+//        val spinner: Spinner = binding.ivProfile
+//        ArrayAdapter.createFromResource(
+//            this.requireActivity(),
+//            R.array.profile_array,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            spinner.adapter = adapter
+//        }
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+//                when( spinner.getPositionForView(p1)){
+//                   1 -> findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+//                }
+//            }
+//
+//            override fun onNothingSelected(p0: AdapterView<*>?) {
+//                return
+//            }
+//        }
     }
 
     private fun fetchAllData(){
