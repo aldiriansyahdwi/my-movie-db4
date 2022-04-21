@@ -23,7 +23,7 @@ import java.util.*
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get()= _binding!!
-    val sharedPreFile = "login_account"
+    private val sharedPreFile = "login_account"
     private var userDb: UserDatabase? = null
 
     override fun onCreateView(
@@ -50,6 +50,7 @@ class ProfileFragment : Fragment() {
         val realName = binding.etRealName.text.toString()
         val birthday = binding.etBirthday.text.toString()
         val address = binding.etAddress.text.toString()
+            val editor : SharedPreferences.Editor = sharedPreferences.edit()
             when{
                 username.isEmpty() -> binding.etUsername.error = "input new username"
                 realName.isEmpty() -> binding.etRealName.error = "input your real name"
@@ -62,6 +63,8 @@ class ProfileFragment : Fragment() {
 
                         activity?.runOnUiThread{
                             if(update != 0){
+                                editor.putString("username", username)
+                                editor.apply()
                                 Toast.makeText(it.context, "Update Success", Toast.LENGTH_SHORT).show()
                                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
                             }else{

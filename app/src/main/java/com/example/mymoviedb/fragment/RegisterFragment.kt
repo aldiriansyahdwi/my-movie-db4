@@ -41,7 +41,7 @@ class RegisterFragment : Fragment() {
 
             val userData = User(email, username, password, null, null, null)
             when {
-                username.isEmpty() -> { binding.etUsername.error = "username cannot be empty" }
+                username.length <= 4 -> { binding.etUsername.error = "username cannot be empty" }
                 email.isEmpty() -> { binding.etEmail.error = "email cannot be empty" }
 //                checkEmailExists(userData) -> { binding.etEmail.error = "email already exists" }
                 password.isEmpty() -> { binding.etPassword.error = "password cannot be empty" }

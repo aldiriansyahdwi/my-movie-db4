@@ -88,7 +88,7 @@
         android:id="@+id/ly_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/confirm_password_hint"
+        android:hint="@string/address_hint"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginStart="@dimen/margin_input_login"
         android:layout_marginEnd="@dimen/margin_input_login"
