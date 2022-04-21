@@ -3,7 +3,6 @@ package com.example.mymoviedb.fragment
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,18 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentHomeBinding
-import com.example.mymoviedb.listmovie.GetPopularMovieResponse
 import com.example.mymoviedb.listmovie.ListMovieAdapter
 import com.example.mymoviedb.listmovie.Results
-import com.example.mymoviedb.service.ApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get()= _binding!!
-    val sharedPreFile = "login_account"
+    private val sharedPreFile = "login_account"
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -42,7 +36,7 @@ class HomeFragment : Fragment() {
         val sharedPreferences: SharedPreferences = requireActivity().getSharedPreferences(sharedPreFile, Context.MODE_PRIVATE)
 
         binding.rvMovieList.layoutManager = LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
-        binding.tvWelcomeUser.text = "Welcome, ${sharedPreferences.getString("username", "-")}"
+        binding.tvWelcomeUser.text = getString(R.string.welcome_user_text, sharedPreferences.getString("username", "-"))
 
         viewModel.fetchAllData()
         viewModel.listMovie.observe(viewLifecycleOwner) { response ->

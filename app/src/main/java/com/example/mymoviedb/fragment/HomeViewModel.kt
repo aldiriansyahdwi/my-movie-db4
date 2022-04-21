@@ -1,13 +1,9 @@
 package com.example.mymoviedb.fragment
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import com.example.mymoviedb.listmovie.GetPopularMovieResponse
-import com.example.mymoviedb.listmovie.ListMovieAdapter
-import com.example.mymoviedb.listmovie.Results
 import com.example.mymoviedb.service.ApiClient
 import retrofit2.Call
 import retrofit2.Callback

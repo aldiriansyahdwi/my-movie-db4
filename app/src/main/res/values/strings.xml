@@ -7,12 +7,12 @@
     <string name="login_button_text">Login</string>
     <string name="register_nav_text">Not register yet?</string>
     <string name="ic_profile_desc">icon profile</string>
-    <string name="welcome_user_text">welcome, user</string>
+    <string name="welcome_user_text">welcome, %1$s</string>
     <string name="title_placeholder">Movie Title</string>
     <string name="duration_placeholder">0 hours 0 minutes</string>
     <string name="genre_placeholder">movie genre</string>
     <string name="poster_image">poster image</string>
-    <string name="release_date_placeholder">2000-01-01</string>
+    <string name="release_date_placeholder">2000–01–01</string>
     <string name="popularity_placeholder">popularity</string>
     <string name="rating_placeholder">Rating</string>
     <string name="description_placeholder">description</string>
@@ -26,7 +26,6 @@
     <string name="birthday_hint">birthday</string>
     <string name="update_text">Update</string>
     <string-array name="profile_array">
-        <item></item>
         <item>Profile</item>
         <item>Log Out</item>
     </string-array>
