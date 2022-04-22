@@ -7,7 +7,7 @@
     android:background="@color/orange_main"
     tools:context=".fragment.HomeFragment">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_marginStart="@dimen/margin_home"
         android:layout_marginTop="@dimen/margin_home"
         android:id="@+id/tv_welcome_user"
@@ -18,7 +18,10 @@
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/white"
         android:text="@string/welcome_user_text"
-        android:textSize="20sp"/>
+        app:autoSizeTextType="uniform"
+        app:autoSizeMaxTextSize="20sp"
+        app:autoSizeMinTextSize="10sp"
+        app:autoSizeStepGranularity="2sp"/>
 
     <ImageView
         android:layout_width="36dp"
