@@ -1,4 +1,4 @@
-package com.example.mymoviedb.fragment
+package com.example.mymoviedb.ui
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
 
         viewModel.fetchAllData()
         viewModel.listMovie.observe(viewLifecycleOwner) { response ->
-            showList(response.results)
+            showList(response?.results)
         }
 //        fetchAllData()
 

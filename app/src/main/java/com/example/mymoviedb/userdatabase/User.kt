@@ -13,4 +13,5 @@ class User (
     @ColumnInfo(name = "real_name") var realName: String?,
     @ColumnInfo(name = "birth_date") var birthDate: String?,
     @ColumnInfo(name = "address") var address: String?
+
 )

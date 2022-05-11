@@ -1,4 +1,4 @@
-package com.example.mymoviedb.fragment
+package com.example.mymoviedb.ui
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel: ViewModel() {
-    val listMovie: MutableLiveData<GetPopularMovieResponse> = MutableLiveData()
+    private val _listMovie: MutableLiveData<GetPopularMovieResponse?> = MutableLiveData()
+    val listMovie: MutableLiveData<GetPopularMovieResponse?>
+    get() = _listMovie
 
     fun fetchAllData(){
         ApiClient.instance.getPopularMovie()
@@ -19,7 +21,7 @@ class HomeViewModel: ViewModel() {
                     val body = response.body()
                     val code = response.code()
                     if (code == 200){
-                        listMovie.postValue(body)
+                        _listMovie.postValue(body)
                         Log.d("response-code", code.toString())
                     }
                     else{

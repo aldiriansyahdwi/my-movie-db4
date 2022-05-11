@@ -1,4 +1,4 @@
-package com.example.mymoviedb.fragment
+package com.example.mymoviedb.ui
 
 import android.os.Bundle
 import android.util.Log

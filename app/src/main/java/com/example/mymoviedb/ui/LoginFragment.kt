@@ -1,4 +1,4 @@
-package com.example.mymoviedb.fragment
+package com.example.mymoviedb.ui
 
 import android.content.Context
 import android.content.SharedPreferences
