@@ -1,4 +1,4 @@
-package com.example.mymoviedb.ui
+package com.example.mymoviedb.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,6 @@ import com.example.mymoviedb.userdatabase.UserDatabase
 
 class RegisterFragment : Fragment() {
 
-//    private var userDb: UserDatabase? = null
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: RegisterViewModel
@@ -32,7 +31,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this, RegisterViewModelFactory(UserDatabase.getInstance(this.requireContext())))[RegisterViewModel::class.java]
-//        userDb = UserDatabase.getInstance(this.requireContext())
+
         binding.btnRegister.setOnClickListener {
             val username: String = binding.etUsername.text.toString()
             val email: String = binding.etEmail.text.toString()
@@ -40,6 +39,7 @@ class RegisterFragment : Fragment() {
             val confirmPassword: String = binding.etConfirmPassword.text.toString()
 
             val userData = User(email, username, password, null, null, null)
+
             when {
                 username.length <= 4 -> { binding.etUsername.error = "username must be at least 4 characters" }
                 email.isEmpty() -> { binding.etEmail.error = "email cannot be empty" }

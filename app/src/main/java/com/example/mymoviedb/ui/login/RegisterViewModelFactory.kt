@@ -1,4 +1,4 @@
-package com.example.mymoviedb.ui
+package com.example.mymoviedb.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

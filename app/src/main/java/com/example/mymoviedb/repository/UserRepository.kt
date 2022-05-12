@@ -12,4 +12,6 @@ class UserRepository(private val userDb: UserDatabase) {
     suspend fun updateUser(user: User) = userDb.userDao().updateUser(user)
 
     suspend fun verifyLogin(email: String, password: String) = userDb.userDao().verifyLogin(email, password)
+
+    suspend fun checkEmail(email: String) = userDb.userDao().checkEmail(email)
 }

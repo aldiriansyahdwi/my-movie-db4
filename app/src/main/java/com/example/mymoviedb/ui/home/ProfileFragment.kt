@@ -1,4 +1,4 @@
-package com.example.mymoviedb.ui
+package com.example.mymoviedb.ui.home
 
 import android.app.DatePickerDialog
 import android.content.Context
