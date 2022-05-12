@@ -26,6 +26,7 @@
     <string name="birthday_hint">birthday</string>
     <string name="update_text">Update</string>
     <string name="address_hint">Address</string>
+    <string name="icon_favorite">icon favorite</string>
     <string-array name="profile_array">
         <item>Profile</item>
         <item>Log Out</item>

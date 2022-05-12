@@ -69,10 +69,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
 
-        binding.ivExit.setOnClickListener {
-            viewModel.deleteLogin()
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-            Toast.makeText(requireContext(), "Log Out", Toast.LENGTH_SHORT).show()
+        binding.ivFavorite.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
     }
 

@@ -33,9 +33,4 @@ class HomeViewModel(private val moviePopularRepository: MoviePopularRepository, 
         return pref.getEmail().asLiveData()
     }
 
-    fun deleteLogin(){
-        runBlocking {
-            pref.deleteUser()
-        }
-    }
 }

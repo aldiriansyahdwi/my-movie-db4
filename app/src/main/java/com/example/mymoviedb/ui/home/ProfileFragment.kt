@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentProfileBinding
+import com.example.mymoviedb.repository.UserDataStoreManager
 import com.example.mymoviedb.userdatabase.User
 import com.example.mymoviedb.userdatabase.UserDatabase
 import kotlinx.coroutines.GlobalScope
@@ -23,8 +25,7 @@ import java.util.*
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get()= _binding!!
-    private val sharedPreFile = "login_account"
-    private var userDb: UserDatabase? = null
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,48 +38,62 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userDb = UserDatabase.getInstance(this.requireContext())
-        val sharedPreferences: SharedPreferences = this.requireActivity().getSharedPreferences(sharedPreFile, Context.MODE_PRIVATE)
-        val email = sharedPreferences.getString("email", "-")
-        val password = sharedPreferences.getString("password", "-")
-
+        
+        viewModel = ViewModelProvider(this, 
+            ProfileViewModelFactory(UserDatabase.getInstance(this.requireContext()), 
+            UserDataStoreManager(this.requireContext())))[ProfileViewModel::class.java]
 
         binding.etBirthday.transformIntoDatePicker(requireContext(), "MM/dd/yyyy", Date())
-
-        binding.btnUpdate.setOnClickListener {
-        val username = binding.etUsername.text.toString()
-        val realName = binding.etRealName.text.toString()
-        val birthday = binding.etBirthday.text.toString()
-        val address = binding.etAddress.text.toString()
-            val editor : SharedPreferences.Editor = sharedPreferences.edit()
-            when{
-                username.isEmpty() -> binding.etUsername.error = "input new username"
-                realName.isEmpty() -> binding.etRealName.error = "input your real name"
-                birthday.isEmpty() -> binding.etBirthday.error = "pick your birthday"
-                address.isEmpty() -> binding.etAddress.error = "input your address"
-                else -> {
-                    GlobalScope.async{
-                        val dataUpdate = email?.let { it1 -> User(it1, username, password, realName, birthday, address) }
-                        val update = dataUpdate?.let { it1 -> userDb?.userDao()?.updateUser(it1) }
-
-                        activity?.runOnUiThread{
+        
+        viewModel.getEmail().observe(viewLifecycleOwner){
+            val oldUser = viewModel.checkEmail(it)
+            binding.apply {
+                try {
+                    etUsername.setText(oldUser[0].username ?: "")
+                    etRealName.setText(oldUser[0].realName ?: "")
+                    etBirthday.setText(oldUser[0].birthDate ?: "")
+                    etAddress.setText(oldUser[0].address ?: "")
+                }catch (exception: Exception){ }
+                
+                btnUpdate.setOnClickListener {
+                    val username = binding.etUsername.text.toString()
+                    val realName = binding.etRealName.text.toString()
+                    val birthday = binding.etBirthday.text.toString()
+                    val address = binding.etAddress.text.toString()
+                    when{
+                        username.isEmpty() -> binding.etUsername.error = "input new username"
+                        realName.isEmpty() -> binding.etRealName.error = "input your real name"
+                        birthday.isEmpty() -> binding.etBirthday.error = "pick your birthday"
+                        address.isEmpty() -> binding.etAddress.error = "input your address"
+                        else -> {
+                            val update = viewModel.updateData(User(oldUser[0].email, 
+                                username, oldUser[0].password, realName, 
+                                birthday, address))
+                            
                             if(update != 0){
-                                editor.putString("username", username)
-                                editor.apply()
-                                Toast.makeText(it.context, "Update Success", Toast.LENGTH_SHORT).show()
+                                oldUser[0].username?.let { it1 ->
+                                    viewModel.saveDataStore(oldUser[0].email,
+                                        it1
+                                    )
+                                }
+                                Toast.makeText(context, "Update Success", Toast.LENGTH_SHORT).show()
                                 findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
                             }else{
-                                Toast.makeText(it.context, "error", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                             }
                         }
-                    }
                 }
-
             }
+            }
+        }
+        binding.btnLogout.setOnClickListener {
+            viewModel.deleteLogin()
+            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+            Toast.makeText(requireContext(), "Log Out", Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null){
+    private fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null){
         isFocusableInTouchMode = false
         isClickable = true
         isFocusable = false
@@ -107,5 +122,4 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
 }

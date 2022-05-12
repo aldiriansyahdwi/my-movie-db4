@@ -25,24 +25,11 @@
         />
 
     <ImageView
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:id="@+id/iv_exit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/margin_home"
-        android:layout_marginTop="@dimen/margin_home"
-        android:src="@drawable/ic_exit"
-        android:focusable="true"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground"
-        />
-    <ImageView
         android:id="@+id/iv_profile"
         android:layout_marginTop="@dimen/margin_home"
-        android:layout_marginEnd="@dimen/margin_item"
+        android:layout_marginEnd="@dimen/margin_home"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_exit"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:contentDescription="@string/ic_profile_desc"
@@ -51,6 +38,20 @@
         android:clickable="true"
         android:background="?android:attr/selectableItemBackground"
         />
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:id="@+id/iv_favorite"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_profile"
+        android:layout_marginTop="@dimen/margin_home"
+        android:layout_marginEnd="@dimen/margin_item"
+        android:contentDescription="@string/icon_favorite"
+        android:src="@drawable/ic_favorite"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
