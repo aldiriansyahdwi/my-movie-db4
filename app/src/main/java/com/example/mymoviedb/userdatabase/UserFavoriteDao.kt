@@ -5,11 +5,14 @@ import androidx.room.*
 @Dao
 interface UserFavoriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorite(userFavorite: UserFavorite): Long
+    suspend fun insertFavorite(userFavorite: UserFavorite): Long
 
     @Delete
-    fun deleteFavorite(userFavorite: UserFavorite): Int
+    suspend fun deleteFavorite(userFavorite: UserFavorite): Int
 
     @Query("SELECT * FROM UserFavorite WHERE user_email LIKE :email")
-    fun getAllUserFavorite(email: String?): List<UserFavorite>
+    suspend fun getAllUserFavorite(email: String?): List<UserFavorite>
+
+    @Query("SELECT * FROM UserFavorite WHERE user_email LIKE :email AND movie_id LIKE :movieId")
+    suspend fun isFavorited(email: String, movieId: Int): List<UserFavorite>
 }

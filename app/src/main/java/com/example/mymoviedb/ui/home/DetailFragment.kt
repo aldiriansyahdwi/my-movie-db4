@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.mymoviedb.databinding.FragmentDetailBinding
@@ -14,6 +15,10 @@ import com.example.mymoviedb.detailmovie.Genre
 import com.example.mymoviedb.detailmovie.GetDetailMovieResponse
 import com.example.mymoviedb.detailmovie.ProductionCompany
 import com.example.mymoviedb.service.ApiClient
+import com.example.mymoviedb.service.ApiHelper
+import com.example.mymoviedb.userdatabase.UserFavorite
+import com.example.mymoviedb.userdatabase.UserFavoriteDatabase
+import com.example.mymoviedb.utils.Status
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,6 +27,7 @@ class DetailFragment : Fragment() {
     private var _binding : FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val args: DetailFragmentArgs by navArgs()
+    private lateinit var viewModel: DetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,32 +41,44 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val movieId = args.movieId
-        getDetail(movieId)
+        val ownerEmail = args.emailUser
+        viewModel = ViewModelProvider(this,
+        DetailViewModelFactory(ApiHelper(ApiClient.instance),
+        UserFavoriteDatabase.getInstance(this.requireContext())))[DetailViewModel::class.java]
+
+        isFavorited(ownerEmail, movieId)
+
+        viewModel.getDetail(movieId).observe(viewLifecycleOwner) {resources ->
+            when (resources.status){
+                Status.LOADING -> {
+
+                }
+                Status.SUCCESS ->{
+                    favoriteClicked(movieId, ownerEmail)
+                    resources.data?.let { showDetail(it) }
+                }
+                Status.ERROR -> {
+
+                }
+            }
+        }
     }
 
-    private fun getDetail(movieId : Int){
-        ApiClient.instance.getDetailMovie(movieId)
-            .enqueue(object: Callback<GetDetailMovieResponse> {
-                override fun onResponse(
-                    call: Call<GetDetailMovieResponse>,
-                    response: Response<GetDetailMovieResponse>
-                ) {
-                    val body = response.body()
-                    val code = response.code()
-                    if (code == 200){
-                        body?.let { showDetail(it) }
-                        Log.d("response-detail", code.toString())
-                    }
-                    else{
-                        Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
-                        Log.d("response-detail", code.toString())
-                    }
-                }
+    private fun isFavorited(email: String, id: Int){
+        if (viewModel.isFavorited(email, id).isNotEmpty()){
+            binding.btnFavorite.isEnabled = false
+            binding.btnFavorite.text = "Favorited"
+        }
+    }
 
-                override fun onFailure(call: Call<GetDetailMovieResponse>, t: Throwable) {
-                    Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
-                }
-            })
+    private fun favoriteClicked(movieId: Int, owner: String){
+        binding.btnFavorite.setOnClickListener {
+            val addFavorite = viewModel.saveFavorite(UserFavorite(null, owner, movieId))
+            if (addFavorite != 0.toLong()){
+                Toast.makeText(requireContext(), "added to favorite", Toast.LENGTH_SHORT).show()
+                isFavorited(owner, movieId)
+            }
+        }
     }
 
     private fun showDetail(data : GetDetailMovieResponse){

@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 class UserFavorite (
     @PrimaryKey (autoGenerate = true) var id: Int?,
     @ColumnInfo (name = "user_email") var userEmail: String?,
-    @ColumnInfo (name = "movie_id") var movieId: String
+    @ColumnInfo (name = "movie_id") var movieId: Int
 )

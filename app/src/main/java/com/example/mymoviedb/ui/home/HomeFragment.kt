@@ -54,7 +54,10 @@ class HomeFragment : Fragment() {
 
                 }
                 Status.SUCCESS -> {
-                    showList(resources.data)
+                    viewModel.getEmail().observe(viewLifecycleOwner){
+                        showList(resources.data, it)
+                    }
+
                 }
                 Status.ERROR -> {
 
@@ -73,11 +76,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showList(data: GetPopularMovieResponse?){
+    private fun showList(data: GetPopularMovieResponse?, owner: String){
         val adapter = ListMovieAdapter(object : ListMovieAdapter.OnClickListener{
             override fun onClickItem(data: Results) {
                 val movieId = data.id
-                val clickedToDetail = movieId?.let { HomeFragmentDirections.actionHomeFragmentToDetailFragment(it) }
+                val clickedToDetail = movieId?.let { HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                    it,
+                    owner
+                ) }
                 clickedToDetail?.let { findNavController().navigate(it) }
             }
         })

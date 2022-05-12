@@ -43,7 +43,6 @@ class RegisterFragment : Fragment() {
             when {
                 username.length <= 4 -> { binding.etUsername.error = "username must be at least 4 characters" }
                 email.isEmpty() -> { binding.etEmail.error = "email cannot be empty" }
-//                checkEmailExists(userData) -> { binding.etEmail.error = "email already exists" }
                 password.length <= 4 -> { binding.etPassword.error = "password must be at least 4 characters" }
                 confirmPassword != password -> { binding.etConfirmPassword.error = "password doesn't match" }
                 else ->  {
@@ -58,15 +57,4 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
-//    private fun checkEmailExists(userData: User?): Boolean{
-//        var result: List<User>? = null
-//        GlobalScope.async{
-//            result = userDb?.userDao()?.checkEmail(userData?.email)
-//        }
-//        return when {
-//            result.isNullOrEmpty() -> true
-//            else -> false
-//        }
-//    }
 }
