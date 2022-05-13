@@ -70,7 +70,11 @@ class HomeFragment : Fragment() {
         }
 
         binding.ivFavorite.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_favoriteFragment)
+            viewModel.getEmail().observe(viewLifecycleOwner) {
+                val emailFavorite = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment(it)
+                findNavController().navigate(emailFavorite)
+
+            }
         }
     }
 

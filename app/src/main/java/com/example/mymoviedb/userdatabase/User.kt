@@ -1,5 +1,6 @@
 package com.example.mymoviedb.userdatabase
 
+import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,6 +13,7 @@ class User (
     @ColumnInfo(name = "password") var password: String?,
     @ColumnInfo(name = "real_name") var realName: String?,
     @ColumnInfo(name = "birth_date") var birthDate: String?,
-    @ColumnInfo(name = "address") var address: String?
+    @ColumnInfo(name = "address") var address: String?,
+    @ColumnInfo(name = "profile") var profilePhoto: Bitmap
 
 )

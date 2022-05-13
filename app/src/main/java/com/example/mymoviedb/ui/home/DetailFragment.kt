@@ -54,7 +54,14 @@ class DetailFragment : Fragment() {
 
                 }
                 Status.SUCCESS ->{
-                    favoriteClicked(movieId, ownerEmail)
+
+                    resources.data?.title?.let {
+                        resources.data.posterPath?.let { it1 ->
+                            UserFavorite(null, ownerEmail, movieId,
+                                it, it1
+                            )
+                        }
+                    }?.let { favoriteClicked(it) }
                     resources.data?.let { showDetail(it) }
                 }
                 Status.ERROR -> {
@@ -71,12 +78,12 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun favoriteClicked(movieId: Int, owner: String){
+    private fun favoriteClicked(favorite: UserFavorite){
         binding.btnFavorite.setOnClickListener {
-            val addFavorite = viewModel.saveFavorite(UserFavorite(null, owner, movieId))
+            val addFavorite = viewModel.saveFavorite(favorite)
             if (addFavorite != 0.toLong()){
                 Toast.makeText(requireContext(), "added to favorite", Toast.LENGTH_SHORT).show()
-                isFavorited(owner, movieId)
+                favorite.userEmail?.let { it1 -> isFavorited(it1, favorite.movieId) }
             }
         }
     }
