@@ -38,8 +38,6 @@ class FavoriteFragment : Fragment() {
         viewModel.favorite.observe(viewLifecycleOwner) {
             showList(it)
         }
-
-
     }
 
     private fun showList(data: List<UserFavorite>){

@@ -33,17 +33,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.apply {
-            getUsername().observe(viewLifecycleOwner){
-                if (it != "-"){
-                    requireActivity().runOnUiThread {
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                    }
-                }
-            }
-        }
-
-        binding.tvRegister.setOnClickListener {
+                binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
@@ -63,6 +53,11 @@ class LoginFragment : Fragment() {
                     ).show()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
+            }
+        }
+        viewModel.getUsername().observe(viewLifecycleOwner){
+            if (it != "-"){
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
     }

@@ -1,13 +1,6 @@
 package com.example.mymoviedb.ui.profile
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.*
-import coil.ImageLoader
-import coil.request.ImageRequest
-import coil.request.SuccessResult
 import com.example.mymoviedb.data.repository.Repository
 import com.example.mymoviedb.data.userdatabase.User
 import kotlinx.coroutines.launch
@@ -39,19 +32,8 @@ class ProfileViewModel(private val repository: Repository): ViewModel() {
     }
 
     fun deleteLogin(){
-        viewModelScope.launch {
+        runBlocking {
             repository.deleteUser()
         }
-    }
-
-
-    fun getBitmap(image: Drawable, context: Context): Bitmap = runBlocking{
-        val loading = ImageLoader(context)
-        val request = ImageRequest.Builder(context)
-            .data(image)
-            .build()
-
-        val result = (loading.execute(request) as SuccessResult).drawable
-        (result as BitmapDrawable).bitmap
     }
 }

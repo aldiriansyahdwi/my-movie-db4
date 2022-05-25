@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mymoviedb.R
@@ -26,6 +27,10 @@ import com.example.mymoviedb.data.userdatabase.User
 import com.example.mymoviedb.data.userdatabase.UserDatabase
 import com.example.mymoviedb.utils.PermissionUtils
 import com.example.mymoviedb.utils.StorageUtils
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,7 +39,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get()= _binding!!
     private val viewModel: ProfileViewModel by viewModel()
-    private var image : Uri? = null
+    private lateinit var image : Uri
 
     private val cameraResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -89,6 +94,12 @@ class ProfileFragment : Fragment() {
 
         binding.etBirthday.transformIntoDatePicker(requireContext(), "MM/dd/yyyy", Date())
 
+        binding.btnLogout.setOnClickListener {
+            viewModel.deleteLogin()
+            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+            Toast.makeText(requireContext(), "Log Out", Toast.LENGTH_SHORT).show()
+        }
+
         viewModel.getEmail().observe(viewLifecycleOwner) {
             viewModel.checkEmail(it)
             viewModel.user.observe(viewLifecycleOwner) { user ->
@@ -103,71 +114,76 @@ class ProfileFragment : Fragment() {
                     }
 
                     ivProfile.setOnClickListener {
-                        if (PermissionUtils.isPermissionsGranted(
-                                requireActivity(),
-                                getRequiredPermission()
-                            )
-                        ) {
-                            openCamera()
-
-                        }
-
-                        btnUpdate.setOnClickListener {
-                            val username = binding.etUsername.text.toString()
-                            val realName = binding.etRealName.text.toString()
-                            val birthday = binding.etBirthday.text.toString()
-                            val address = binding.etAddress.text.toString()
-                            when {
-                                username.isEmpty() -> binding.etUsername.error =
-                                    "input new username"
-                                realName.isEmpty() -> binding.etRealName.error =
-                                    "input your real name"
-                                birthday.isEmpty() -> binding.etBirthday.error =
-                                    "pick your birthday"
-                                address.isEmpty() -> binding.etAddress.error = "input your address"
-                                else -> {
-                                    val imgProfile: Bitmap = BitmapFactory.decodeStream(
-                                        requireActivity().contentResolver.openInputStream(image!!)
-                                    )
-                                    //todo fix update can execute without change profile
-                                    viewModel.updateData(
-                                        User(
-                                            user[0].email,
-                                            username, user[0].password, realName,
-                                            birthday, address, imgProfile
-                                        )
-                                    )
-                                    viewModel.updatedUser.observe(viewLifecycleOwner) { update ->
-
-                                        if (update != 0) {
-                                            user[0].username?.let { it1 ->
-                                                viewModel.saveDataStore(
-                                                    user[0].email,
-                                                    it1
-                                                )
-                                            }
-                                            Toast.makeText(
-                                                context,
-                                                "Update Success",
-                                                Toast.LENGTH_SHORT
-                                            )
-                                                .show()
-                                            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
-                                        } else {
-                                            Toast.makeText(context, "Error", Toast.LENGTH_SHORT)
-                                                .show()
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        tryOpenCamera()
+                    }
+                    btnUpdate.setOnClickListener {
+                        val username = binding.etUsername.text.toString()
+                        val realName = binding.etRealName.text.toString()
+                        val birthday = binding.etBirthday.text.toString()
+                        val address = binding.etAddress.text.toString()
+                        checkInput(username, realName, birthday, address, user[0])
                     }
                 }
             }
-            binding.btnLogout.setOnClickListener {
-                viewModel.deleteLogin()
-                findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-                Toast.makeText(requireContext(), "Log Out", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun tryOpenCamera(){
+        if (PermissionUtils.isPermissionsGranted(
+                requireActivity(),
+                getRequiredPermission())
+        ) { openCamera() }
+    }
+
+    private fun checkInput(username: String, realName: String, birthday: String, address: String, user: User){
+        when {
+            username.isEmpty() -> binding.etUsername.error =
+                "input new username"
+            realName.isEmpty() -> binding.etRealName.error =
+                "input your real name"
+            birthday.isEmpty() -> binding.etBirthday.error =
+                "pick your birthday"
+            address.isEmpty() -> binding.etAddress.error = "input your address"
+            else -> {
+                val imgProfile: Bitmap = binding.ivProfile.drawable.toBitmap()
+
+//                if(image != null) {
+//                    imgProfile = BitmapFactory.decodeStream(
+//                        requireActivity().contentResolver.openInputStream(image)
+//                    )
+//                } else {
+
+
+
+                viewModel.updateData(
+                    User(
+                        user.email,
+                        username, user.password, realName,
+                        birthday, address, imgProfile
+                    )
+                )
+                viewModel.updatedUser.observe(viewLifecycleOwner) { update ->
+
+                    if (update != 0) {
+                        user.username?.let { it1 ->
+                            viewModel.saveDataStore(
+                                user.email,
+                                it1
+                            )
+                        }
+                        Toast.makeText(
+                            context,
+                            "Update Success",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                        findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+                    } else {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
             }
         }
     }
