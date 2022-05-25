@@ -5,24 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentHomeBinding
-import com.example.mymoviedb.listmovie.GetPopularMovieResponse
-import com.example.mymoviedb.listmovie.ListMovieAdapter
-import com.example.mymoviedb.listmovie.Results
-import com.example.mymoviedb.repository.UserDataStoreManager
-import com.example.mymoviedb.service.ApiClient
-import com.example.mymoviedb.service.ApiHelper
+import com.example.mymoviedb.data.listmovie.GetPopularMovieResponse
+import com.example.mymoviedb.data.listmovie.ListMovieAdapter
+import com.example.mymoviedb.data.listmovie.Results
 import com.example.mymoviedb.utils.Status
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get()= _binding!!
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,10 +34,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rvMovieList.layoutManager = LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
-        viewModel = ViewModelProvider(this,
-            HomeViewModelFactory(
-                ApiHelper(ApiClient.instance),
-                UserDataStoreManager(this.requireContext())))[HomeViewModel::class.java]
+
 
         viewModel.apply{
             getUsername().observe(viewLifecycleOwner){

@@ -1,31 +1,30 @@
 package com.example.mymoviedb.ui.login
 
 import androidx.lifecycle.*
-import com.example.mymoviedb.repository.UserDataStoreManager
-import com.example.mymoviedb.repository.UserRepository
-import com.example.mymoviedb.userdatabase.User
-import kotlinx.coroutines.flow.first
+import com.example.mymoviedb.data.repository.Repository
+import com.example.mymoviedb.data.userdatabase.User
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class LoginViewModel (private val userRepository: UserRepository, private val pref: UserDataStoreManager): ViewModel(){
+class LoginViewModel (private val repository: Repository): ViewModel(){
+    private val _user : MutableLiveData<List<User>> = MutableLiveData()
+    val user : LiveData<List<User>> get() = _user
 
-
-    fun verifyLogin(email: String, password: String): List<User> = runBlocking {
-        userRepository.verifyLogin(email, password)
+    fun verifyLogin(email: String, password: String) = viewModelScope.launch {
+        _user.value = repository.verifyLogin(email, password)
     }
 
     fun saveDataStore(email: String, username: String){
-        runBlocking {
-            pref.setUser(email, username)
+        viewModelScope.launch {
+            repository.setUser(email, username)
         }
     }
 
     fun getEmail(): LiveData<String>{
-        return pref.getEmail().asLiveData()
+        return repository.getEmail().asLiveData()
     }
 
     fun getUsername(): LiveData<String>{
-        return pref.getUsername().asLiveData()
+        return repository.getUsername().asLiveData()
     }
 }
