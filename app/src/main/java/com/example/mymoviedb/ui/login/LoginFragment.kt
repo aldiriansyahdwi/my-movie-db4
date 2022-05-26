@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginFragment : Fragment() {
-    private var _binding : FragmentLoginBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LoginViewModel by viewModel()
 //    private val sharedPreFile = "login_account"
@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-                binding.tvRegister.setOnClickListener {
+        binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
@@ -55,8 +55,8 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-        viewModel.getUsername().observe(viewLifecycleOwner){
-            if (it != "-"){
+        viewModel.getUsername().observe(viewLifecycleOwner) {
+            if (it != "-") {
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }

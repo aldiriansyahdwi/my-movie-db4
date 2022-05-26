@@ -17,7 +17,7 @@ import com.example.mymoviedb.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
-    private var _binding : FragmentDetailBinding? = null
+    private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val args: DetailFragmentArgs by navArgs()
     private val viewModel: DetailViewModel by viewModel()
@@ -38,16 +38,17 @@ class DetailFragment : Fragment() {
 
         isFavorite(ownerEmail, movieId)
 
-        viewModel.getDetail(movieId).observe(viewLifecycleOwner) {resources ->
-            when (resources.status){
+        viewModel.getDetail(movieId).observe(viewLifecycleOwner) { resources ->
+            when (resources.status) {
                 Status.LOADING -> {
 
                 }
-                Status.SUCCESS ->{
+                Status.SUCCESS -> {
 
                     resources.data?.title?.let {
                         resources.data.posterPath?.let { it1 ->
-                            UserFavorite(null, ownerEmail, movieId,
+                            UserFavorite(
+                                null, ownerEmail, movieId,
                                 it, it1
                             )
                         }
@@ -61,7 +62,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun isFavorite(email: String, id: Int){
+    private fun isFavorite(email: String, id: Int) {
         viewModel.isFavorite(email, id)
         viewModel.favorite.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
@@ -71,7 +72,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun favoriteClicked(favorite: UserFavorite){
+    private fun favoriteClicked(favorite: UserFavorite) {
         binding.btnFavorite.setOnClickListener {
             viewModel.saveFavorite(favorite)
             viewModel.saved.observe(viewLifecycleOwner) {
@@ -83,11 +84,11 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun showDetail(data : GetDetailMovieResponse){
+    private fun showDetail(data: GetDetailMovieResponse) {
         binding.apply {
-                Glide.with(this@DetailFragment)
-                    .load("https://image.tmdb.org/t/p/w500${data.posterPath}")
-                    .into(ivMoviePoster)
+            Glide.with(this@DetailFragment)
+                .load("https://image.tmdb.org/t/p/w500${data.posterPath}")
+                .into(ivMoviePoster)
             tvMovieTitle.text = data.title
             tvMovieReleaseDate.text = data.releaseDate
             tvVoteAverage.text = data.voteAverage.toString()
@@ -98,24 +99,22 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun movieGenre (listGenre : List<Genre>): String{
+    private fun movieGenre(listGenre: List<Genre>): String {
         var movieGenre = ""
         listGenre.forEach {
-            if(movieGenre.isEmpty()){
+            if (movieGenre.isEmpty()) {
                 movieGenre = it.name.toString()
-            }
-            else movieGenre += ", ${it.name}"
+            } else movieGenre += ", ${it.name}"
         }
         return movieGenre
     }
 
-    private fun movieProduction (listProduction : List<ProductionCompany>): String{
+    private fun movieProduction(listProduction: List<ProductionCompany>): String {
         var movieProduction = ""
         listProduction.forEach {
-            if(movieProduction.isEmpty()){
+            if (movieProduction.isEmpty()) {
                 movieProduction = it.name.toString()
-            }
-            else movieProduction += ", ${it.name}"
+            } else movieProduction += ", ${it.name}"
         }
         return movieProduction
     }

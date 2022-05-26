@@ -1,6 +1,6 @@
 package com.example.mymoviedb.data.userdatabase
 
-class DbHelper (private val userDao: UserDao, private val userFavoriteDao: UserFavoriteDao) {
+class DbHelper(private val userDao: UserDao, private val userFavoriteDao: UserFavoriteDao) {
     // user
     suspend fun insertUser(user: User) = userDao.insertUser(user)
 
@@ -8,7 +8,7 @@ class DbHelper (private val userDao: UserDao, private val userFavoriteDao: UserF
 
     suspend fun verifyLogin(email: String, password: String) = userDao.verifyLogin(email, password)
 
-    suspend fun  checkEmail(email: String) = userDao.checkEmail(email)
+    suspend fun checkEmail(email: String) = userDao.checkEmail(email)
 
     // user favorite
     suspend fun insertFavorite(favorite: UserFavorite) = userFavoriteDao.insertFavorite(favorite)

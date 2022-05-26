@@ -8,12 +8,12 @@ import com.example.mymoviedb.data.repository.Repository
 import com.example.mymoviedb.data.userdatabase.User
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val repository: Repository): ViewModel() {
-    private val _savedUser : MutableLiveData<Long> = MutableLiveData()
+class RegisterViewModel(private val repository: Repository) : ViewModel() {
+    private val _savedUser: MutableLiveData<Long> = MutableLiveData()
     val savedUser: LiveData<Long>
-    get() = _savedUser
+        get() = _savedUser
 
-    fun saveUser (user: User) = viewModelScope.launch {
+    fun saveUser(user: User) = viewModelScope.launch {
         _savedUser.value = repository.insertUser(user)
     }
 }

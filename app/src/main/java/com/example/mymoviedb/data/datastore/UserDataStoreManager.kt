@@ -10,9 +10,10 @@ import kotlinx.coroutines.flow.map
 val Context.userDataStore by preferencesDataStore(
     name = UserDataStoreManager.DATASTORE_NAME
 )
-class UserDataStoreManager (private val context: Context){
 
-    suspend fun setUser(emailValue: String, usernameValue: String){
+class UserDataStoreManager(private val context: Context) {
+
+    suspend fun setUser(emailValue: String, usernameValue: String) {
         context.userDataStore.edit { preferences ->
             preferences[EMAIL_KEY] = emailValue
             preferences[USERNAME_KEY] = usernameValue
@@ -20,18 +21,18 @@ class UserDataStoreManager (private val context: Context){
     }
 
     fun getEmail(): Flow<String> {
-        return context.userDataStore.data.map{ preferences ->
+        return context.userDataStore.data.map { preferences ->
             preferences[EMAIL_KEY] ?: "-"
         }
     }
 
     fun getUsername(): Flow<String> {
-        return context.userDataStore.data.map{ preferences ->
+        return context.userDataStore.data.map { preferences ->
             preferences[USERNAME_KEY] ?: "-"
         }
     }
 
-    suspend fun deleteUser(){
+    suspend fun deleteUser() {
         context.userDataStore.edit {
             it.remove(EMAIL_KEY)
             it.remove(USERNAME_KEY)

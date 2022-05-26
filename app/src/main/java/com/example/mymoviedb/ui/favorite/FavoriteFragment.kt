@@ -15,7 +15,7 @@ import com.example.mymoviedb.data.userdatabase.UserFavorite
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
-    private var _binding : FragmentFavoriteBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FavoriteViewModel by viewModel()
     private val args: FavoriteFragmentArgs by navArgs()
@@ -32,7 +32,8 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvFavorite.layoutManager = LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
+        binding.rvFavorite.layoutManager =
+            LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         viewModel.getFavorite(args.email)
         viewModel.favorite.observe(viewLifecycleOwner) {
@@ -40,8 +41,8 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    private fun showList(data: List<UserFavorite>){
-        val adapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener{
+    private fun showList(data: List<UserFavorite>) {
+        val adapter = FavoriteAdapter(object : FavoriteAdapter.OnClickListener {
             override fun onClickItem(data: UserFavorite) {
                 val clickedToDetail = data.userEmail?.let {
                     FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(
@@ -53,7 +54,7 @@ class FavoriteFragment : Fragment() {
                     findNavController().navigate(clickedToDetail)
                 }
             }
-        }, object : FavoriteAdapter.OnClickListener{
+        }, object : FavoriteAdapter.OnClickListener {
             override fun onClickItem(data: UserFavorite) {
                 viewModel.deleteFavorite(data)
             }

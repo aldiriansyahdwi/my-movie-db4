@@ -9,13 +9,16 @@ import com.bumptech.glide.Glide
 import com.example.mymoviedb.databinding.FavoriteItemBinding
 import com.example.mymoviedb.data.userdatabase.UserFavorite
 
-class FavoriteAdapter(private val onItemClick: OnClickListener, private val onDeleteClick: OnClickListener): RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+class FavoriteAdapter(
+    private val onItemClick: OnClickListener,
+    private val onDeleteClick: OnClickListener
+) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
-    interface OnClickListener{
+    interface OnClickListener {
         fun onClickItem(data: UserFavorite)
     }
 
-    private val diffCallBack = object: DiffUtil.ItemCallback<UserFavorite>(){
+    private val diffCallBack = object : DiffUtil.ItemCallback<UserFavorite>() {
         override fun areItemsTheSame(oldItem: UserFavorite, newItem: UserFavorite): Boolean {
             return oldItem.id == newItem.id
         }
@@ -44,8 +47,9 @@ class FavoriteAdapter(private val onItemClick: OnClickListener, private val onDe
         return differ.currentList.size
     }
 
-    inner class ViewHolder(private val binding: FavoriteItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: UserFavorite){
+    inner class ViewHolder(private val binding: FavoriteItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: UserFavorite) {
             binding.apply {
                 tvMovieTitle.text = data.movieTitle
                 Glide.with(itemView)

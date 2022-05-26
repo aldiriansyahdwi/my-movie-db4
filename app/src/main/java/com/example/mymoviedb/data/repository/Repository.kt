@@ -7,7 +7,7 @@ import com.example.mymoviedb.data.userdatabase.User
 import com.example.mymoviedb.data.userdatabase.UserFavorite
 
 class Repository(
-    private val apiHelper : ApiHelper,
+    private val apiHelper: ApiHelper,
     private val dbHelper: DbHelper,
     private val dataStore: UserDataStoreManager
 ) {
@@ -33,7 +33,7 @@ class Repository(
 
     suspend fun getFavorite(email: String) = dbHelper.getAllFavorite(email)
 
-    suspend fun addFavorite(email: String, movieId: Int) = dbHelper.favorite(email, movieId)
+    suspend fun isFavorite(email: String, movieId: Int) = dbHelper.favorite(email, movieId)
 
     // data store
     suspend fun setUser(email: String, username: String) = dataStore.setUser(email, username)

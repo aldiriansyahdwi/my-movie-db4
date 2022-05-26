@@ -9,12 +9,12 @@ import com.example.mymoviedb.data.userdatabase.UserFavorite
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class FavoriteViewModel (private val repository: Repository): ViewModel(){
-    private val _favorite : MutableLiveData<List<UserFavorite>> = MutableLiveData()
-    val favorite : MutableLiveData<List<UserFavorite>> get() = _favorite
+class FavoriteViewModel(private val repository: Repository) : ViewModel() {
+    private val _favorite: MutableLiveData<List<UserFavorite>> = MutableLiveData()
+    val favorite: MutableLiveData<List<UserFavorite>> get() = _favorite
 
-    private val _deleted : MutableLiveData<Int> = MutableLiveData()
-    val deleted : MutableLiveData<Int> get() = _deleted
+    private val _deleted: MutableLiveData<Int> = MutableLiveData()
+    val deleted: MutableLiveData<Int> get() = _deleted
 
     fun getFavorite(email: String) = viewModelScope.launch {
         _favorite.value = repository.getFavorite(email)

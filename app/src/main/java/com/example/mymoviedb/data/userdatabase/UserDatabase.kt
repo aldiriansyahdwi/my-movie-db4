@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 
 @Database(entities = [User::class, UserFavorite::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class UserDatabase: RoomDatabase(){
+abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
     abstract fun userFavoriteDao(): UserFavoriteDao

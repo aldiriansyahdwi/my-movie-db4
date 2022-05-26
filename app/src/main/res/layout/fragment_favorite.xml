@@ -17,8 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/margin_home"
-        android:layout_marginStart="@dimen/margin_home"
-        />
+        android:layout_marginStart="@dimen/margin_home" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -28,7 +27,6 @@
         android:layout_marginTop="@dimen/margin_home"
         android:layout_marginHorizontal="@dimen/margin_home"
         android:id="@+id/rv_favorite"
-        tools:listitem="@layout/favorite_item"
-        />
+        tools:listitem="@layout/favorite_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

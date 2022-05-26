@@ -46,20 +46,49 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun checkInput(username: String, email: String, password: String, confirmPassword: String){
+    private fun checkInput(
+        username: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ) {
         when {
-            username.length <= 4 -> { binding.etUsername.error = "username must be at least 4 characters" }
-            email.isEmpty() -> { binding.etEmail.error = "email cannot be empty" }
-            password.length <= 4 -> { binding.etPassword.error = "password must be at least 4 characters" }
-            confirmPassword != password -> { binding.etConfirmPassword.error = "password doesn't match" }
-            else ->  { lifecycleScope.launch {
-                    viewModel.saveUser(User(email, username, password, null, null, null, getBitmap()))
+            username.length <= 4 -> {
+                binding.etUsername.error = "username must be at least 4 characters"
+            }
+            email.isEmpty() -> {
+                binding.etEmail.error = "email cannot be empty"
+            }
+            password.length <= 4 -> {
+                binding.etPassword.error = "password must be at least 4 characters"
+            }
+            confirmPassword != password -> {
+                binding.etConfirmPassword.error = "password doesn't match"
+            }
+            else -> {
+                lifecycleScope.launch {
+                    viewModel.saveUser(
+                        User(
+                            email,
+                            username,
+                            password,
+                            null,
+                            null,
+                            null,
+                            getBitmap()
+                        )
+                    )
                     viewModel.savedUser.observe(viewLifecycleOwner) {
                         if (it != 0.toLong()) {
-                            Toast.makeText(requireContext(), "Register Successfully", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Register Successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                         } else {
-                            Toast.makeText(requireContext(), "Register failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Register failed", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
                 }

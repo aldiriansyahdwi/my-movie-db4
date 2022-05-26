@@ -32,14 +32,13 @@
         app:layout_constraintTop_toBottomOf="@id/img_app"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:boxStrokeErrorColor="@color/red_error"
-        >
+        app:boxStrokeErrorColor="@color/red_error">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_email"
-            android:inputType="textEmailAddress"
-            />
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -54,15 +53,14 @@
         android:layout_marginStart="@dimen/margin_input_login"
         android:layout_marginEnd="@dimen/margin_input_login"
         app:boxStrokeErrorColor="@color/red_error"
-        app:endIconMode="password_toggle"
-        >
+        app:endIconMode="password_toggle">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_password"
             android:inputType="textPassword"
-            android:paddingEnd="@dimen/padding_et"
-            />
+            android:paddingEnd="@dimen/padding_et" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -73,8 +71,7 @@
         app:layout_constraintTop_toBottomOf="@id/ly_datepicker_birthday"
         android:layout_marginStart="@dimen/margin_input_login"
         android:layout_marginEnd="@dimen/margin_input_login"
-        android:text="@string/login_button_text"
-        />
+        android:text="@string/login_button_text" />
 
     <TextView
         android:id="@+id/tv_register"
@@ -88,6 +85,6 @@
         android:text="@string/register_nav_text"
         android:focusable="true"
         android:clickable="true"
-        android:background="?android:attr/selectableItemBackground"/>
+        android:background="?android:attr/selectableItemBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

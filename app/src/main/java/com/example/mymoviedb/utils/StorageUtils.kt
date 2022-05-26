@@ -10,7 +10,11 @@ import java.io.IOException
 
 object StorageUtils {
 
-    fun savePhotoToExternalStorage(contentResolver : ContentResolver?, name: String, bmp: Bitmap?): Uri? {
+    fun savePhotoToExternalStorage(
+        contentResolver: ContentResolver?,
+        name: String,
+        bmp: Bitmap?
+    ): Uri? {
         val imageCollection: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
         } else {

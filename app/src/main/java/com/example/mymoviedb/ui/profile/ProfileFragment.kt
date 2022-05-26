@@ -37,9 +37,9 @@ import java.util.*
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
-    private val binding get()= _binding!!
+    private val binding get() = _binding!!
     private val viewModel: ProfileViewModel by viewModel()
-    private lateinit var image : Uri
+    private lateinit var image: Uri
 
     private val cameraResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -67,10 +67,10 @@ class ProfileFragment : Fragment() {
         cameraResult.launch(cameraIntent)
     }
 
-    private fun getRequiredPermission(): Array<String>{
+    private fun getRequiredPermission(): Array<String> {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
-        }else{
+        } else {
             arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -129,14 +129,23 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun tryOpenCamera(){
+    private fun tryOpenCamera() {
         if (PermissionUtils.isPermissionsGranted(
                 requireActivity(),
-                getRequiredPermission())
-        ) { openCamera() }
+                getRequiredPermission()
+            )
+        ) {
+            openCamera()
+        }
     }
 
-    private fun checkInput(username: String, realName: String, birthday: String, address: String, user: User){
+    private fun checkInput(
+        username: String,
+        realName: String,
+        birthday: String,
+        address: String,
+        user: User
+    ) {
         when {
             username.isEmpty() -> binding.etUsername.error =
                 "input new username"
@@ -153,7 +162,6 @@ class ProfileFragment : Fragment() {
 //                        requireActivity().contentResolver.openInputStream(image)
 //                    )
 //                } else {
-
 
 
                 viewModel.updateData(
@@ -188,7 +196,11 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun EditText.transformIntoDatePicker(context: Context, format: String, maxDate: Date? = null){
+    private fun EditText.transformIntoDatePicker(
+        context: Context,
+        format: String,
+        maxDate: Date? = null
+    ) {
         isFocusableInTouchMode = false
         isClickable = true
         isFocusable = false

@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
-    private val binding get()= _binding!!
+    private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
@@ -33,22 +33,23 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvMovieList.layoutManager = LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
+        binding.rvMovieList.layoutManager =
+            LinearLayoutManager(this.requireActivity(), LinearLayoutManager.VERTICAL, false)
 
 
-        viewModel.apply{
-            getUsername().observe(viewLifecycleOwner){
+        viewModel.apply {
+            getUsername().observe(viewLifecycleOwner) {
                 binding.tvWelcomeUser.text = it
             }
         }
 
         viewModel.fetchAllData().observe(viewLifecycleOwner) { resources ->
-            when (resources.status){
+            when (resources.status) {
                 Status.LOADING -> {
 
                 }
                 Status.SUCCESS -> {
-                    viewModel.getEmail().observe(viewLifecycleOwner){
+                    viewModel.getEmail().observe(viewLifecycleOwner) {
                         showList(resources.data, it)
                     }
 
@@ -72,14 +73,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showList(data: GetPopularMovieResponse?, owner: String){
-        val adapter = ListMovieAdapter(object : ListMovieAdapter.OnClickListener{
+    private fun showList(data: GetPopularMovieResponse?, owner: String) {
+        val adapter = ListMovieAdapter(object : ListMovieAdapter.OnClickListener {
             override fun onClickItem(data: Results) {
                 val movieId = data.id
-                val clickedToDetail = movieId?.let { HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                    it,
-                    owner
-                ) }
+                val clickedToDetail = movieId?.let {
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                        it,
+                        owner
+                    )
+                }
                 clickedToDetail?.let { findNavController().navigate(it) }
             }
         })
