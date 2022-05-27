@@ -22,18 +22,18 @@ class ProfileViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getEmail(): LiveData<String> {
-        return repository.getEmail().asLiveData()
+        return repository.getEmailPref().asLiveData()
     }
 
     fun saveDataStore(email: String, username: String) {
         viewModelScope.launch {
-            repository.setUser(email, username)
+            repository.setUserPref(email, username)
         }
     }
 
     fun deleteLogin() {
         runBlocking {
-            repository.deleteUser()
+            repository.deleteUserPref()
         }
     }
 }

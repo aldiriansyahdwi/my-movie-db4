@@ -18,11 +18,11 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
 
     fun getUsername(): LiveData<String> {
-        return repository.getUsername().asLiveData()
+        return repository.getUsernamePref().asLiveData()
     }
 
     fun getEmail(): LiveData<String> {
-        return repository.getEmail().asLiveData()
+        return repository.getEmailPref().asLiveData()
     }
 
 }

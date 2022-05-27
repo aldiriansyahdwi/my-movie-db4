@@ -36,12 +36,12 @@ class Repository(
     suspend fun isFavorite(email: String, movieId: Int) = dbHelper.favorite(email, movieId)
 
     // data store
-    suspend fun setUser(email: String, username: String) = dataStore.setUser(email, username)
+    suspend fun setUserPref(email: String, username: String) = dataStore.setUser(email, username)
 
-    fun getEmail() = dataStore.getEmail()
+    fun getEmailPref() = dataStore.getEmail()
 
-    fun getUsername() = dataStore.getUsername()
+    fun getUsernamePref() = dataStore.getUsername()
 
-    suspend fun deleteUser() = dataStore.deleteUser()
+    suspend fun deleteUserPref() = dataStore.deleteUser()
 
 }

@@ -194,7 +194,7 @@ class RepositoryTest {
                 dataStoreManager.setUser(inputEmail, inputUsername)
             }
         } returns any()
-        repository.setUser(inputEmail, inputUsername)
+        repository.setUserPref(inputEmail, inputUsername)
         verify {
             runBlocking { dataStoreManager.setUser(inputEmail, inputUsername) }
         }
@@ -208,7 +208,7 @@ class RepositoryTest {
                 dataStoreManager.getEmail()
             }
         } returns respEmail
-        repository.getEmail()
+        repository.getEmailPref()
         verify {
             runBlocking { dataStoreManager.getEmail() }
         }
@@ -222,7 +222,7 @@ class RepositoryTest {
                 dataStoreManager.getUsername()
             }
         } returns respUsername
-        repository.getUsername()
+        repository.getUsernamePref()
         verify {
             runBlocking { dataStoreManager.getUsername() }
         }
@@ -235,7 +235,7 @@ class RepositoryTest {
                 dataStoreManager.deleteUser()
             }
         } returns any()
-        repository.deleteUser()
+        repository.deleteUserPref()
         verify {
             runBlocking { dataStoreManager.deleteUser() }
         }

@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import com.example.mymoviedb.data.repository.Repository
 import com.example.mymoviedb.data.userdatabase.User
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
     private val _user: MutableLiveData<List<User>> = MutableLiveData()
@@ -16,15 +15,15 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
 
     fun saveDataStore(email: String, username: String) {
         viewModelScope.launch {
-            repository.setUser(email, username)
+            repository.setUserPref(email, username)
         }
     }
 
     fun getEmail(): LiveData<String> {
-        return repository.getEmail().asLiveData()
+        return repository.getEmailPref().asLiveData()
     }
 
     fun getUsername(): LiveData<String> {
-        return repository.getUsername().asLiveData()
+        return repository.getUsernamePref().asLiveData()
     }
 }
