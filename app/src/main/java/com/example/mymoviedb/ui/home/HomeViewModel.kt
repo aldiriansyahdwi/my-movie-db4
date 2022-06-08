@@ -14,11 +14,9 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         fetchAllData()
     }
 
-    private fun fetchAllData(){
-        viewModelScope.launch {
-            val result = repository.getMovie()
-            listMovie.value = result.results!!
-        }
+    private fun fetchAllData() = viewModelScope.launch {
+        val result = repository.getMovie()
+        listMovie.value = result.results!!
     }
 
     fun getUsername(): LiveData<String> {
