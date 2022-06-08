@@ -33,6 +33,7 @@ import com.example.mymoviedb.ui.theme.OrangeMain
 import com.example.mymoviedb.ui.theme.OrangeSecondary
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class LoginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by viewModel()

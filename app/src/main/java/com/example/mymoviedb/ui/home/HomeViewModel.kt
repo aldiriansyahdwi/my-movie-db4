@@ -1,19 +1,23 @@
 package com.example.mymoviedb.ui.home
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.*
+import com.example.mymoviedb.data.listmovie.Results
 import com.example.mymoviedb.data.repository.Repository
-import com.example.mymoviedb.utils.Resource
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
-    val username: MutableLiveData<String> = MutableLiveData("")
+    val listMovie: MutableState<List<Results>> = mutableStateOf(ArrayList())
 
-    fun fetchAllData() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(null))
-        try {
-            emit(Resource.success(data = repository.getMovie()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occured!"))
+    init {
+        fetchAllData()
+    }
+
+    private fun fetchAllData(){
+        viewModelScope.launch {
+            val result = repository.getMovie()
+            listMovie.value = result.results!!
         }
     }
 
@@ -24,5 +28,4 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     fun getEmail(): LiveData<String> {
         return repository.getEmailPref().asLiveData()
     }
-
 }
