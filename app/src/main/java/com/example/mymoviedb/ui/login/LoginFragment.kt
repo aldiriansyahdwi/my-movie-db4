@@ -135,7 +135,7 @@ fun LoginButtonAction(onClickLogin :() -> Unit, onClickRegister:() -> Unit){
             Text(text = "LOGIN")
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Not registered yet?", modifier = Modifier.clickable(onClick = onClickRegister), style = TextStyle(color = Color.Black) )
+        Text(text = "Register here", modifier = Modifier.clickable(onClick = onClickRegister), style = TextStyle(color = Color.Black) )
     }
 }
 
