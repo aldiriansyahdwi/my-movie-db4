@@ -4,10 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mymoviedb.data.repository.Repository
-import com.example.mymoviedb.data.userdatabase.User
 import com.example.mymoviedb.data.userdatabase.UserFavorite
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class FavoriteViewModel(private val repository: Repository) : ViewModel() {
     private val _favorite: MutableLiveData<List<UserFavorite>> = MutableLiveData()

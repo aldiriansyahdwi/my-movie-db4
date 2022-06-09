@@ -73,7 +73,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.0'
     //room
     kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.room:room-runtime:2.4.2'
