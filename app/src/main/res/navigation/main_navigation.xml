@@ -22,8 +22,7 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.mymoviedb.ui.register.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register">
+        android:label="fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -34,7 +33,7 @@
         android:id="@+id/homeFragment"
         android:name="com.example.mymoviedb.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home">
+        >
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -48,8 +47,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.mymoviedb.ui.detail.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail">
+        android:label="fragment_detail">
         <argument
             android:name="movie_id"
             app:argType="integer" />

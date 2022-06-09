@@ -6,7 +6,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -19,18 +18,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.graphics.drawable.toBitmap
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mymoviedb.R
 import com.example.mymoviedb.databinding.FragmentProfileBinding
 import com.example.mymoviedb.data.userdatabase.User
-import com.example.mymoviedb.data.userdatabase.UserDatabase
 import com.example.mymoviedb.utils.PermissionUtils
 import com.example.mymoviedb.utils.StorageUtils
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -84,7 +77,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -156,14 +148,6 @@ class ProfileFragment : Fragment() {
             address.isEmpty() -> binding.etAddress.error = "input your address"
             else -> {
                 val imgProfile: Bitmap = binding.ivProfile.drawable.toBitmap()
-
-//                if(image != null) {
-//                    imgProfile = BitmapFactory.decodeStream(
-//                        requireActivity().contentResolver.openInputStream(image)
-//                    )
-//                } else {
-
-
                 viewModel.updateData(
                     User(
                         user.email,
@@ -172,7 +156,6 @@ class ProfileFragment : Fragment() {
                     )
                 )
                 viewModel.updatedUser.observe(viewLifecycleOwner) { update ->
-
                     if (update != 0) {
                         user.username?.let { it1 ->
                             viewModel.saveDataStore(

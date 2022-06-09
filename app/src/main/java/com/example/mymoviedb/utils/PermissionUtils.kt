@@ -9,7 +9,7 @@ import android.provider.Settings
 import androidx.core.app.ActivityCompat
 
 object PermissionUtils {
-    const val REQUEST_CODE_PERMISSIONS = 100
+    private const val REQUEST_CODE_PERMISSIONS = 100
 
     private fun hasPermissions(context: Context, vararg permissions: String): Boolean =
         permissions.all {

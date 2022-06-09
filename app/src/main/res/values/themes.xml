@@ -3,7 +3,7 @@
     <style name="Theme.MyMovieDB" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/orange_main</item>
-        <item name="colorPrimaryVariant">@color/orang_secondary</item>
+        <item name="colorPrimaryVariant">@color/orange_secondary</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

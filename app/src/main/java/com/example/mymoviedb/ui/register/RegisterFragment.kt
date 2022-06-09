@@ -192,7 +192,6 @@ fun RegisterPreview() {
     MyFirstComposeTheme {
         Column {
             RegisterHeader()
-//            RegisterBody()
             RegisterButtonAction{}
         }
     }
